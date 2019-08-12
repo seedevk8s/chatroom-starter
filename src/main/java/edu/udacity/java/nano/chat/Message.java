@@ -15,28 +15,29 @@ public class Message {
         LEAVE
     }
 
-    @JSONField(name = "username")
-    private  String name;                   // The username of the sender
-
-    @JSONField(name = "msg")
-    private String message;                 // The message body
-
     private MessageType messageType;        // The type of the message
+    private  String name;                   // The username of the sender
+    private String message;                 // The message body
     private int onlineCount;                // Sessions counter
 
-    public Message() {
-    }
-
-    public Message(String name, String message, MessageType messageType, int onlineCount) {
+    public Message(MessageType messageType, String name, String message, int onlineCount) {
+        this.messageType = messageType;
         this.name = name;
         this.message = message;
-        this.messageType = messageType;
         this.onlineCount = onlineCount;
     }
 
     // Take a JSON as input and return a String
-    public static String jsonToStr(String username, String msg, MessageType type, int onlineCount) {
-        return JSON.toJSONString(new Message(username, msg, type, onlineCount));
+    public static String jsonToStr(MessageType messageType, String name, String message, int onlineTotal) {
+        return JSON.toJSONString(new Message(messageType,name,message,onlineTotal));
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
     }
 
     public String getName() {
@@ -53,14 +54,6 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public MessageType getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(MessageType messageType) {
-        this.messageType = messageType;
     }
 
     public int getOnlineCount() {

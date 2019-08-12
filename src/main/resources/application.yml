@@ -3,7 +3,7 @@ spring:
     # Custom name properties used in the app
     name: Welcome to the Chat Room!
   server:
-    port:8080
+    port: 8080
     # Custom properties used in both classes and template
   path:
     loginPath: login

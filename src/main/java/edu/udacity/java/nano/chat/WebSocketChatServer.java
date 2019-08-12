@@ -26,7 +26,7 @@ public class WebSocketChatServer {
     private static Map<String, Session> onlineSessions = new ConcurrentHashMap<>();
 
     private static void sendMessageToAll(String msg) {
-        System.out.println(msg);
+        System.out.println(msg); //
 
         // add send message method.
         // For each active session, send a message
@@ -47,7 +47,7 @@ public class WebSocketChatServer {
     public void onOpen(Session session) {
         //add on open connection.
         onlineSessions.put(session.getId(), session);
-        sendMessageToAll(Message.jsonToStr("","", Message.MessageType.ENTER, onlineSessions.size() ));
+        sendMessageToAll(Message.jsonToStr(Message.MessageType.ENTER,"","",  onlineSessions.size() ));
     }
 
     /**
@@ -57,7 +57,7 @@ public class WebSocketChatServer {
     public void onMessage(Session session, String jsonStr) {
         //add send message.
         Message message = JSON.parseObject(jsonStr, Message.class);
-        sendMessageToAll(Message.jsonToStr(message.getName(),message.getMessage(),Message.MessageType.SPEAK,onlineSessions.size()));
+        sendMessageToAll(Message.jsonToStr(Message.MessageType.SPEAK, message.getName(), message.getMessage(), onlineSessions.size()));
     }
 
     /**
@@ -67,7 +67,7 @@ public class WebSocketChatServer {
     public void onClose(Session session) {
         //add close connection.
         onlineSessions.remove(session.getId());
-        sendMessageToAll(Message.jsonToStr("", "", Message.MessageType.LEAVE, onlineSessions.size()));
+        sendMessageToAll(Message.jsonToStr(Message.MessageType.LEAVE,"", "",  onlineSessions.size()));
     }
 
     /**
