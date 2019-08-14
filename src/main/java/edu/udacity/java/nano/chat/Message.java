@@ -16,20 +16,20 @@ public class Message {
     }
 
     private MessageType messageType;        // The type of the message
-    private  String name;                   // The username of the sender
+    private  String username;                   // The username of the sender
     private String message;                 // The message body
     private int onlineCount;                // Sessions counter
 
-    public Message(MessageType messageType, String name, String message, int onlineCount) {
+    public Message(MessageType messageType, String username, String message, int onlineCount) {
         this.messageType = messageType;
-        this.name = name;
+        this.username = username;
         this.message = message;
         this.onlineCount = onlineCount;
     }
 
     // Take a JSON as input and return a String
-    public static String jsonToStr(MessageType messageType, String name, String message, int onlineTotal) {
-        return JSON.toJSONString(new Message(messageType,name,message,onlineTotal));
+    public static String jsonToStr(MessageType messageType, String username, String message, int onlineTotal) {
+        return JSON.toJSONString(new Message(messageType,username,message,onlineTotal));
     }
 
     public MessageType getMessageType() {
@@ -41,11 +41,11 @@ public class Message {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
 
     public String getMessage() {
