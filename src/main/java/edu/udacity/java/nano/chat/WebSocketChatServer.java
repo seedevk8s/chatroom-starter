@@ -30,14 +30,14 @@ public class WebSocketChatServer {
 
         // add send message method.
         // For each active session, send a message
-        for (Session session : onlineSessions.values()){
+       onlineSessions.forEach((id, session) -> {
             try {
                 session.getBasicRemote().sendText(msg);
             } catch (IOException e) {
                 System.out.println("An error occurred while trying to send the message: ");
                 e.printStackTrace();
             }
-        }
+        });
     }
 
     /**
