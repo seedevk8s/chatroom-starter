@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chat Room</title>
-    <meta charset="utf-8" name="viewport" content="width=device-width">
-    <link rel="stylesheet" th:href="@{/webjars/mdui/dist/css/mdui.css}">
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <link rel="stylesheet" th:href="@{/webjars/mdui/dist/css/mdui.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/mdui/dist/js/mdui.js}"></script>
 </head>
@@ -36,11 +36,8 @@
                         <input class="mdui-textfield-input" id="message"/>
                     </div>
                     <div class="mdui-container" style="padding:20px 35px">
-                        <!-- add a send button to send message -->
-                        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="send-message"
-                                onclick="sendMsgToServer()">Send Message &#x23CE;
-                        </button>
-                        <button class="mdui-btn mdui-color-theme mdui-ripple"
+                        <button class="mdui-btn mdui-color-theme mdui-ripple" id="send-message" onclick="sendMsgToServer()">Send message &#x23CE;</button>
+                        <button class="mdui-btn mdui-color-theme-200 mdui-ripple"
                                 onclick="clearMsg()">Clear
                         </button>
                     </div>
@@ -58,7 +55,6 @@
                     <span class="mdui-chip-icon mdui-color-blue">
                         <i class="mdui-icon material-icons">face</i></span>
                     <span class="mdui-chip-title">Online Users</span>
-                    <!-- check online number num -->
                     <span class="mdui-chip-title chat-num">1</span>
                 </div>
                 <!-- add a message container -->
@@ -98,11 +94,11 @@
             //Receive Message from Server
             var message = JSON.parse(event.data) || {};
             var $messageContainer = $('.message-container');
-            if (message.type === 'SPEAK') {
+            if(message.messageType==='SPEAK') {
                 $messageContainer.append(
                     '<div class="mdui-card" style="margin: 10px 0;">' +
                     '<div class="mdui-card-primary">' +
-                    '<div id="message-card" class="mdui-card-content message-content">' + message.username + "：" + message.message + '</div>' +
+                    '<div id="message-card" class="mdui-card-content message-content">' + message.name + "：" + message.message + '</div>' +
                     '</div></div>');
             }
             $('.chat-num').text(message.onlineCount);
